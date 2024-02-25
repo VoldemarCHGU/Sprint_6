@@ -1,8 +1,6 @@
 import allure
 import pytest
 
-from pages.main_page import MainPage
-
 
 class TestMainPage:
     @allure.title('Проверка ответов на Вопросы о важном {item}')
@@ -20,21 +18,18 @@ class TestMainPage:
         (6, 'Да, пока самокат не привезли. Штрафа не будет, объяснительной записки тоже не попросим. Все же свои.'),
         (7, 'Да, обязательно. Всем самокатов! И Москве, и Московской области.'),
     ])
-    def test_question_about_important_answer_success(self, driver, item, expected_text):
-        main_page = MainPage(driver)
+    def test_question_about_important_answer_success(self, main_page, item, expected_text):
         text_answer = main_page.question_get_text_after_click(item)
         assert text_answer == expected_text
 
     @allure.title('Переход на главную страницу через лого "Самокат"')
-    def test_scooter_button_success(self, driver):
-        main_page = MainPage(driver)
+    def test_scooter_button_success(self, main_page):
         main_page.click_to_logo_scooter()
         page_title = main_page.get_text_title()
         assert 'на пару дней' in page_title
 
     @allure.title('При нажатии на лого "Яндекс" переходим на страницу Дзен')
-    def test_go_to_dzen_success(self, driver):
-        main_page = MainPage(driver)
+    def test_go_to_dzen_success(self, main_page):
         main_page.click_to_logo_yandex()
         page_link, active_text = main_page.switch_to_window_and_return_link()
         assert 'dzen.ru' in page_link and active_text == 'Главная'

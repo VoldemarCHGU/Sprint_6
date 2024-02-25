@@ -9,14 +9,14 @@ from pages.base_page import BasePage
 
 class OrderPage(BasePage):
 
-    @allure.step('Нажимаем на нижнюю кнопку заказа')
-    def click_on_down_order_button(self):
-        self.scroll_to_element(OrderPageLocators.DOWN_BUTTON)
-        self.click_element(OrderPageLocators.DOWN_BUTTON)
-
-    @allure.step('Нажимаем на верхнюю кнопку заказа')
-    def click_on_up_order_button(self):
-        self.click_element(OrderPageLocators.UP_BUTTON)
+    @allure.step('Нажимаем на кнопку заказа')
+    def click_on_order_button(self, choose_btn):
+        if choose_btn == "down_btn":
+            button = OrderPageLocators.DOWN_BUTTON
+        else:
+            button = OrderPageLocators.UP_BUTTON
+        self.scroll_to_element(button)
+        self.click_element(button)
 
     @allure.step('Вводим имя')
     def input_send_name(self, name):

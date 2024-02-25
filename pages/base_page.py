@@ -12,7 +12,6 @@ class BasePage:
         return method, locator.format(value)
 
     def find_element_wait_until(self, locator):
-        """общая функция для поиска с ожиданием"""
         WebDriverWait(self.driver, 10).until(expected_conditions.visibility_of_element_located(locator))
         return self.driver.find_element(*locator)
 
